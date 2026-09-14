@@ -59,7 +59,7 @@
     var a = e.target && e.target.closest ? e.target.closest('a[href]') : null;
     if (!a || a.target === '_blank') return;
     var href = a.getAttribute('href') || '';
-    if (!/\.dc\.html$/.test(href)) return;
+    if (!/\.html(#.*)?$/.test(href)) return;
     if (reduced()) return;
     var ov = ensureOverlay();
     if (!ov) return;
