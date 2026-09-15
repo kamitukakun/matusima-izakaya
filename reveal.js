@@ -84,32 +84,40 @@
   }
 })();
 
-/* ハンバーガーメニュー（スマホ幅） */
+/* ハンバーガーメニュー（スマホ幅・ドロワー） */
 (function () {
   function init() {
-    var btn = document.querySelector('.nav-toggle');
-    var panel = document.getElementById('site-nav');
-    if (!btn || !panel) return;
+    var btn = document.getElementById('nav-toggle-btn');
+    var drawer = document.getElementById('site-nav-drawer');
+    if (!btn || !drawer) return;
 
-    function close() {
-      btn.setAttribute('aria-expanded', 'false');
-      panel.classList.remove('is-open');
-    }
-    function toggle() {
-      var open = btn.getAttribute('aria-expanded') === 'true';
-      btn.setAttribute('aria-expanded', String(!open));
-      panel.classList.toggle('is-open', !open);
+    var label = btn.querySelector('span');
+    var bars = btn.querySelectorAll('span[aria-hidden] > span');
+
+    function setOpen(open) {
+      btn.setAttribute('aria-expanded', String(open));
+      drawer.setAttribute('aria-hidden', String(!open));
+      drawer.style.maxHeight = open ? '520px' : '0px';
+      drawer.style.opacity = open ? '1' : '0';
+      if (label) label.textContent = open ? 'CLOSE' : 'MENU';
+      if (bars.length === 3) {
+        bars[0].style.transform = open ? 'translateY(6.5px) rotate(45deg)' : 'none';
+        bars[1].style.opacity = open ? '0' : '1';
+        bars[2].style.transform = open ? 'translateY(-6.5px) rotate(-45deg)' : 'none';
+      }
     }
 
-    btn.addEventListener('click', toggle);
-    panel.addEventListener('click', function (e) {
-      if (e.target && e.target.closest && e.target.closest('a')) close();
+    btn.addEventListener('click', function () {
+      setOpen(btn.getAttribute('aria-expanded') !== 'true');
+    });
+    drawer.addEventListener('click', function (e) {
+      if (e.target && e.target.closest && e.target.closest('a')) setOpen(false);
     });
     document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') close();
+      if (e.key === 'Escape') setOpen(false);
     });
     window.addEventListener('resize', function () {
-      if (window.innerWidth > 680) close();
+      if (window.innerWidth > 640) setOpen(false);
     });
   }
 

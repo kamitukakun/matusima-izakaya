@@ -22,20 +22,33 @@
   @keyframes nagi-ember{0%,100%{opacity:.62}50%{opacity:1}}
   @keyframes nagi-cue{0%{transform:scaleY(0);transform-origin:top}45%{transform:scaleY(1);transform-origin:top}55%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
   @media (prefers-reduced-motion: reduce){*{animation:none !important}}
-  .nav-toggle{display:none;flex-direction:column;justify-content:center;align-items:center;gap:5px;width:34px;height:34px;padding:0;margin-left:auto;background:transparent;border:0;cursor:pointer}
-  .nav-toggle-bar{display:block;width:22px;height:2px;background:#efe6d6;transition:transform .25s ease,opacity .25s ease}
-  .nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(1){transform:translateY(7px) rotate(45deg)}
-  .nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(2){opacity:0}
-  .nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
-  .site-nav{display:contents}
-  @media (max-width:680px){
-    .nav-toggle{display:flex}
-    .site-nav{display:none;flex-basis:100%;order:3;flex-direction:column;align-items:stretch;gap:0;border-top:1px solid rgba(239,230,214,.12);margin-top:6px;padding-top:2px}
-    .site-nav.is-open{display:flex}
-    .site-nav nav{flex-direction:column;align-items:stretch;gap:0;width:100%}
-    .site-nav nav a{width:100%;padding:14px 4px}
-    .site-nav > a{border-left:0 !important;padding:14px 4px !important}
+  /* モバイルのみ：HEROをコピー＋写真の一体ビジュアルにする */
+  @media (max-width: 640px){
+    [data-hero="sec"]{padding-top:74px !important;padding-bottom:26px !important}
+    [data-hero="meta"]{gap:4px 14px !important;padding-bottom:9px !important}
+    [data-hero="meta"] > span{font-size:9px !important;letter-spacing:.18em !important}
+    [data-hero="hours"]{display:none !important}
+    [data-hero="row"]{display:block !important;position:relative !important;margin-top:12px !important}
+    [data-hero="fig"]{display:block !important}
+    [data-hero="frame"]{aspect-ratio:4/5 !important}
+    [data-hero="h1"]{position:absolute !important;z-index:2;top:0;right:0;width:auto !important;min-height:0 !important;padding:14px 10px 30px 22px;gap:8px !important;background:linear-gradient(258deg,rgba(9,8,7,.8) 0%,rgba(9,8,7,.5) 55%,rgba(9,8,7,0) 100%)}
+    [data-hero="h1"] span:first-child{font-size:27px !important;letter-spacing:.14em !important}
+    [data-hero="cap"]{margin-top:8px !important;font-size:9px !important}
+    [data-hero="side"]{flex-direction:row !important;align-self:auto !important;margin-top:10px}
+    [data-hero="side"] > div{min-height:104px !important}
   }
+
+
+  @media (max-width: 640px){
+    [data-nav="inline"]{display:none !important}
+    [data-nav="ig-desktop"]{display:none !important}
+    [data-nav="burger"]{display:flex !important}
+    [data-nav="brandsub"]{display:none !important}
+  }
+  @media (min-width: 641px){
+    [data-nav="drawer"]{display:none !important}
+  }
+
 </style>
 <script src="reveal.js"></script>
 </head>
@@ -45,51 +58,84 @@
     <a href="index.html" style="display:flex;align-items:baseline;gap:10px;padding:10px 0;margin-right:auto;text-decoration:none">
       <span style="font-family:'Shippori Mincho B1',serif;font-weight:600;font-size:clamp(20px,2.2vw,25px);letter-spacing:.16em;color:#f4ecdd">凪火</span>
       <span style="font:400 9px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.36em;color:#a08f77">NAGIBI</span>
-      <span style="font-size:9.5px;letter-spacing:.2em;color:#7e7263;white-space:nowrap">松島・海鮮居酒屋</span>
+      <span data-nav="brandsub" style="font-size:9.5px;letter-spacing:.2em;color:#7e7263;white-space:nowrap">松島・海鮮居酒屋</span>
     </a>
-    <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="メニューを開く">
-      <span class="nav-toggle-bar"></span><span class="nav-toggle-bar"></span><span class="nav-toggle-bar"></span>
-    </button>
-    <div id="site-nav" class="site-nav">
-    <nav aria-label="サイト内メニュー" style="display:flex;flex-wrap:wrap;align-items:center;gap:0 2px">
-      <a href="index.html" data-page="top" style="padding:13px 11px;font:500 11px/1 'Noto Sans JP',sans-serif;letter-spacing:.2em;color:#cdc2b0;color:#f0c79b;border-bottom:1px solid #c4462a;text-decoration:none" style-hover="color:#f4ecdd;border-bottom-color:rgba(196,70,42,.7)">TOP</a>
+    <nav data-nav="inline" aria-label="サイト内メニュー" style="display:flex;flex-wrap:wrap;align-items:center;gap:0 2px">
+      <a href="index.html" data-page="top" style="color:#f0c79b;padding:13px 11px;font:500 11px/1 'Noto Sans JP',sans-serif;letter-spacing:.2em;color:#cdc2b0;border-bottom:1px solid #c4462a;text-decoration:none" style-hover="color:#f4ecdd;border-bottom-color:rgba(196,70,42,.7)">TOP</a>
       <a href="about.html" data-page="about" style="padding:13px 11px;font:500 11px/1 'Noto Sans JP',sans-serif;letter-spacing:.2em;color:#cdc2b0;border-bottom:1px solid transparent;text-decoration:none" style-hover="color:#f4ecdd;border-bottom-color:rgba(196,70,42,.7)">ABOUT</a>
       <a href="menu.html" data-page="menu" style="padding:13px 11px;font:500 11px/1 'Noto Sans JP',sans-serif;letter-spacing:.2em;color:#cdc2b0;border-bottom:1px solid transparent;text-decoration:none" style-hover="color:#f4ecdd;border-bottom-color:rgba(196,70,42,.7)">MENU</a>
       <a href="space.html" data-page="space" style="padding:13px 11px;font:500 11px/1 'Noto Sans JP',sans-serif;letter-spacing:.2em;color:#cdc2b0;border-bottom:1px solid transparent;text-decoration:none" style-hover="color:#f4ecdd;border-bottom-color:rgba(196,70,42,.7)">SPACE</a>
       <a href="news.html" data-page="news" style="padding:13px 11px;font:500 11px/1 'Noto Sans JP',sans-serif;letter-spacing:.2em;color:#cdc2b0;border-bottom:1px solid transparent;text-decoration:none" style-hover="color:#f4ecdd;border-bottom-color:rgba(196,70,42,.7)">NEWS</a>
       <a href="access.html" data-page="access" style="padding:13px 11px;font:500 11px/1 'Noto Sans JP',sans-serif;letter-spacing:.2em;color:#cdc2b0;border-bottom:1px solid transparent;text-decoration:none" style-hover="color:#f4ecdd;border-bottom-color:rgba(196,70,42,.7)">ACCESS</a>
     </nav>
-    <a href="index.html#instagram" style="display:inline-flex;align-items:center;gap:9px;padding:12px 2px 12px 14px;font:500 11px/1 'Noto Sans JP',sans-serif;letter-spacing:.24em;color:#f0d9bd;border-left:1px solid rgba(239,230,214,.18);text-decoration:none" style-hover="color:#e8935a;letter-spacing:.3em">INSTAGRAM<span style="font-size:13px">→</span></a>
-    </div>
+    <a data-nav="ig-desktop" href="index.html#instagram" style="display:inline-flex;align-items:center;gap:9px;padding:12px 2px 12px 14px;font:500 11px/1 'Noto Sans JP',sans-serif;letter-spacing:.24em;color:#f0d9bd;border-left:1px solid rgba(239,230,214,.18);text-decoration:none" style-hover="color:#e8935a;letter-spacing:.3em">INSTAGRAM<span style="font-size:13px">→</span></a>
+    <button data-nav="burger" type="button" aria-label="メニューを開く" id="nav-toggle-btn" aria-expanded="false" style="display:none;align-items:center;gap:10px;width:auto;min-height:44px;padding:10px 2px 10px 12px;background:transparent;border:0;cursor:pointer;-webkit-tap-highlight-color:transparent">
+      <span style="font:500 9.5px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.28em;color:#a08f77">MENU</span>
+      <span aria-hidden="true" style="display:flex;flex-direction:column;justify-content:center;gap:5px;width:26px;height:26px">
+        <span style="display:block;height:1.5px;background:#f0d9bd;transition:transform .3s ease,opacity .25s ease;transform:none"></span>
+        <span style="display:block;height:1.5px;background:#f0d9bd;transition:opacity .25s ease;opacity:1"></span>
+        <span style="display:block;height:1.5px;background:#f0d9bd;transition:transform .3s ease,opacity .25s ease;transform:none"></span>
+      </span>
+    </button>
+  </div>
+
+  <div data-nav="drawer" id="site-nav-drawer" aria-hidden="true" style="display:block;overflow:hidden;max-height:0px;opacity:0;transition:max-height .42s cubic-bezier(.22,.61,.36,1),opacity .3s ease;border-top:1px solid rgba(239,230,214,.1);background:rgba(9,8,7,.96)">
+    <nav aria-label="サイト内メニュー（モバイル）" style="display:flex;flex-direction:column;padding:6px clamp(14px,4vw,24px) 18px">
+      <a href="index.html" data-page="top" style="color:#f0c79b;display:flex;align-items:baseline;gap:12px;min-height:52px;padding:15px 2px;border-bottom:1px solid #c4462a;text-decoration:none">
+        <span style="flex:0 0 68px;font:500 10px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.24em;color:#a08f77">TOP</span>
+        <span style="font-family:'Shippori Mincho B1',serif;font-size:15px;letter-spacing:.1em;color:#e3d8c5">松島の夜</span>
+      </a>
+      <a href="about.html" data-page="about" style="display:flex;align-items:baseline;gap:12px;min-height:52px;padding:15px 2px;border-bottom:1px solid rgba(239,230,214,.1);text-decoration:none">
+        <span style="flex:0 0 68px;font:500 10px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.24em;color:#a08f77">ABOUT</span>
+        <span style="font-family:'Shippori Mincho B1',serif;font-size:15px;letter-spacing:.1em;color:#e3d8c5">店について</span>
+      </a>
+      <a href="menu.html" data-page="menu" style="display:flex;align-items:baseline;gap:12px;min-height:52px;padding:15px 2px;border-bottom:1px solid rgba(239,230,214,.1);text-decoration:none">
+        <span style="flex:0 0 68px;font:500 10px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.24em;color:#a08f77">MENU</span>
+        <span style="font-family:'Shippori Mincho B1',serif;font-size:15px;letter-spacing:.1em;color:#e3d8c5">お品書き</span>
+      </a>
+      <a href="space.html" data-page="space" style="display:flex;align-items:baseline;gap:12px;min-height:52px;padding:15px 2px;border-bottom:1px solid rgba(239,230,214,.1);text-decoration:none">
+        <span style="flex:0 0 68px;font:500 10px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.24em;color:#a08f77">SPACE</span>
+        <span style="font-family:'Shippori Mincho B1',serif;font-size:15px;letter-spacing:.1em;color:#e3d8c5">店内</span>
+      </a>
+      <a href="news.html" data-page="news" style="display:flex;align-items:baseline;gap:12px;min-height:52px;padding:15px 2px;border-bottom:1px solid rgba(239,230,214,.1);text-decoration:none">
+        <span style="flex:0 0 68px;font:500 10px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.24em;color:#a08f77">NEWS</span>
+        <span style="font-family:'Shippori Mincho B1',serif;font-size:15px;letter-spacing:.1em;color:#e3d8c5">旬の便り</span>
+      </a>
+      <a href="access.html" data-page="access" style="display:flex;align-items:baseline;gap:12px;min-height:52px;padding:15px 2px;border-bottom:1px solid rgba(239,230,214,.1);text-decoration:none">
+        <span style="flex:0 0 68px;font:500 10px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.24em;color:#a08f77">ACCESS</span>
+        <span style="font-family:'Shippori Mincho B1',serif;font-size:15px;letter-spacing:.1em;color:#e3d8c5">場所</span>
+      </a>
+      <a href="index.html#instagram" style="display:inline-flex;align-items:center;gap:10px;align-self:flex-start;min-height:48px;margin-top:16px;padding:14px 2px;font:500 11.5px/1 'Noto Sans JP',sans-serif;letter-spacing:.26em;color:#f4ecdd;border-bottom:2px solid #c4462a;text-decoration:none">INSTAGRAM を見る<span style="font-size:13px">→</span></a>
+    </nav>
   </div>
 </header>
 
 <main style="display:block">
-  <section style="position:relative;overflow:hidden;padding:clamp(100px,12vw,140px) clamp(14px,3vw,44px) clamp(40px,6vw,84px);background:#0d0b0a">
+  <section data-hero="sec" style="position:relative;overflow:hidden;padding:clamp(100px,12vw,140px) clamp(14px,3vw,44px) clamp(40px,6vw,84px);background:#0d0b0a">
     <div aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;background:radial-gradient(78% 58% at 72% 16%,rgba(224,117,47,.14),transparent 62%),radial-gradient(58% 46% at 6% 92%,rgba(94,42,27,.24),transparent 70%);animation:nagi-ember 8s ease-in-out infinite"></div>
     <div style="position:relative;max-width:1512px;margin:0 auto">
-      <div style="display:flex;flex-wrap:wrap;gap:8px 26px;align-items:baseline;padding-bottom:clamp(14px,2.2vw,26px);border-bottom:1px solid rgba(239,230,214,.14)">
+      <div data-hero="meta" style="display:flex;flex-wrap:wrap;gap:8px 26px;align-items:baseline;padding-bottom:clamp(14px,2.2vw,26px);border-bottom:1px solid rgba(239,230,214,.14)">
         <span style="font:400 10px/1.6 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.3em;color:#a08f77">MATSUSHIMA, MIYAGI</span>
         <span style="font-size:11px;letter-spacing:.2em;color:#8d8271">海鮮居酒屋 ／ 炭火 ／ 土鍋 ／ 日本酒</span>
-        <span style="margin-left:auto;font:400 10px/1.6 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.2em;color:#8d8271">今夜の火入れ — HOURS PLACEHOLDER</span>
+        <span data-hero="hours" style="margin-left:auto;font:400 10px/1.6 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.2em;color:#8d8271">今夜の火入れ — HOURS PLACEHOLDER</span>
       </div>
 
-      <div style="display:flex;flex-wrap:wrap;gap:clamp(12px,1.6vw,22px);margin-top:clamp(18px,2.4vw,32px)">
-        <h1 style="flex:0 0 auto;width:clamp(94px,11vw,154px);margin:0;display:flex;flex-direction:row-reverse;justify-content:flex-start;gap:clamp(6px,1vw,16px);min-height:clamp(272px,34vw,452px)">
+      <div data-hero="row" style="display:flex;flex-wrap:wrap;gap:clamp(12px,1.6vw,22px);margin-top:clamp(18px,2.4vw,32px)">
+        <h1 data-hero="h1" style="flex:0 0 auto;width:clamp(94px,11vw,154px);margin:0;display:flex;flex-direction:row-reverse;justify-content:flex-start;gap:clamp(6px,1vw,16px);min-height:clamp(272px,34vw,452px)">
           <span style="writing-mode:vertical-rl;font-family:'Shippori Mincho B1',serif;font-weight:600;font-size:clamp(21px,2.7vw,40px);line-height:1.6;letter-spacing:.16em;color:#f6efe1;text-shadow:0 0 40px rgba(224,117,47,.28)">松島の夜は、<br />海の続き。</span>
           <span style="writing-mode:vertical-rl;white-space:nowrap;align-self:flex-end;font-size:clamp(9.5px,.95vw,11.5px);letter-spacing:.24em;color:#9b8e7c">松島の海鮮居酒屋 凪火</span>
         </h1>
 
-        <figure data-reveal style="flex:1 1 330px;min-width:0;margin:0;position:relative;opacity:0;transform:translateY(20px);transition:opacity 1.5s cubic-bezier(.22,.61,.36,1),transform 1.5s cubic-bezier(.22,.61,.36,1)">
-          <div style="position:relative;width:100%;aspect-ratio:16/10;box-shadow:0 24px 60px rgba(0,0,0,.55)">
+        <figure data-reveal data-hero="fig" style="flex:1 1 330px;min-width:0;margin:0;position:relative;opacity:0;transform:translateY(20px);transition:opacity 1.5s cubic-bezier(.22,.61,.36,1),transform 1.5s cubic-bezier(.22,.61,.36,1)">
+          <div data-hero="frame" style="position:relative;width:100%;aspect-ratio:16/10;box-shadow:0 24px 60px rgba(0,0,0,.55)">
             <div style="display:block;width:100%;height:100%;position:relative;overflow:hidden;background:#161310"><img src="images/hero-counter.png" alt="松島湾の夕暮れを望むカウンターに並ぶ刺身と牡蠣。奥では炭火で魚を焼く料理人の後ろ姿が見える。" style="width:100%;height:100%;object-fit:cover;display:block" /></div>
             <div aria-hidden="true" style="position:absolute;left:18%;bottom:22%;width:90px;height:90px;pointer-events:none;background:radial-gradient(closest-side,rgba(255,240,220,.2),transparent);filter:blur(7px);animation:nagi-steam 9s ease-in-out infinite"></div>
             <div aria-hidden="true" style="position:absolute;left:46%;bottom:30%;width:72px;height:72px;pointer-events:none;background:radial-gradient(closest-side,rgba(255,240,220,.16),transparent);filter:blur(8px);animation:nagi-steam 11s ease-in-out -3.5s infinite"></div>
           </div>
-          <figcaption style="margin-top:10px;font:400 10px/1.8 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.16em;color:#8d8271">カウンター越しの火と、湾の残り明かり。</figcaption>
+          <figcaption data-hero="cap" style="margin-top:10px;font:400 10px/1.8 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.16em;color:#8d8271">カウンター越しの火と、湾の残り明かり。</figcaption>
         </figure>
 
-        <div style="flex:1 1 186px;min-width:0;align-self:stretch;display:flex;flex-direction:column;gap:clamp(10px,1.3vw,16px)">
+        <div data-hero="side" style="flex:1 1 186px;min-width:0;align-self:stretch;display:flex;flex-direction:column;gap:clamp(10px,1.3vw,16px)">
           <div data-reveal data-delay="220" style="flex:3 1 0;min-height:clamp(130px,20vw,200px);opacity:0;transform:translateY(20px);transition:opacity 1.4s cubic-bezier(.22,.61,.36,1),transform 1.4s cubic-bezier(.22,.61,.36,1)">
             <div style="display:block;width:100%;height:100%;position:relative;overflow:hidden;background:#161310"><div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;padding:14px;background-image:repeating-linear-gradient(128deg,#1a1613 0 7px,#15120f 7px 14px);box-shadow:inset 0 0 0 1px rgba(239,230,214,.09)"><span style="font:400 10px/1.7 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.14em;color:#9a8d7b;text-align:center;text-transform:uppercase">HERO 02 ／ 牡蠣を殻ごと炭にのせる手元</span></div></div>
           </div>

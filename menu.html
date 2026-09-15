@@ -20,20 +20,18 @@
   @keyframes nagi-sway{0%,100%{transform:skewX(0deg) translateY(0)}50%{transform:skewX(1.1deg) translateY(2px)}}
   @keyframes nagi-ember{0%,100%{opacity:.62}50%{opacity:1}}
   @media (prefers-reduced-motion: reduce){*{animation:none !important}}
-  .nav-toggle{display:none;flex-direction:column;justify-content:center;align-items:center;gap:5px;width:34px;height:34px;padding:0;margin-left:auto;background:transparent;border:0;cursor:pointer}
-  .nav-toggle-bar{display:block;width:22px;height:2px;background:#efe6d6;transition:transform .25s ease,opacity .25s ease}
-  .nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(1){transform:translateY(7px) rotate(45deg)}
-  .nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(2){opacity:0}
-  .nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
-  .site-nav{display:contents}
-  @media (max-width:680px){
-    .nav-toggle{display:flex}
-    .site-nav{display:none;flex-basis:100%;order:3;flex-direction:column;align-items:stretch;gap:0;border-top:1px solid rgba(239,230,214,.12);margin-top:6px;padding-top:2px}
-    .site-nav.is-open{display:flex}
-    .site-nav nav{flex-direction:column;align-items:stretch;gap:0;width:100%}
-    .site-nav nav a{width:100%;padding:14px 4px}
-    .site-nav > a{border-left:0 !important;padding:14px 4px !important}
+
+
+  @media (max-width: 640px){
+    [data-nav="inline"]{display:none !important}
+    [data-nav="ig-desktop"]{display:none !important}
+    [data-nav="burger"]{display:flex !important}
+    [data-nav="brandsub"]{display:none !important}
   }
+  @media (min-width: 641px){
+    [data-nav="drawer"]{display:none !important}
+  }
+
 </style>
 <script src="reveal.js"></script>
 </head>
@@ -43,22 +41,55 @@
     <a href="index.html" style="display:flex;align-items:baseline;gap:10px;padding:10px 0;margin-right:auto;text-decoration:none">
       <span style="font-family:'Shippori Mincho B1',serif;font-weight:600;font-size:clamp(20px,2.2vw,25px);letter-spacing:.16em;color:#f4ecdd">凪火</span>
       <span style="font:400 9px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.36em;color:#a08f77">NAGIBI</span>
-      <span style="font-size:9.5px;letter-spacing:.2em;color:#7e7263;white-space:nowrap">松島・海鮮居酒屋</span>
+      <span data-nav="brandsub" style="font-size:9.5px;letter-spacing:.2em;color:#7e7263;white-space:nowrap">松島・海鮮居酒屋</span>
     </a>
-    <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="メニューを開く">
-      <span class="nav-toggle-bar"></span><span class="nav-toggle-bar"></span><span class="nav-toggle-bar"></span>
-    </button>
-    <div id="site-nav" class="site-nav">
-    <nav aria-label="サイト内メニュー" style="display:flex;flex-wrap:wrap;align-items:center;gap:0 2px">
+    <nav data-nav="inline" aria-label="サイト内メニュー" style="display:flex;flex-wrap:wrap;align-items:center;gap:0 2px">
       <a href="index.html" data-page="top" style="padding:13px 11px;font:500 11px/1 'Noto Sans JP',sans-serif;letter-spacing:.2em;color:#cdc2b0;border-bottom:1px solid transparent;text-decoration:none" style-hover="color:#f4ecdd;border-bottom-color:rgba(196,70,42,.7)">TOP</a>
       <a href="about.html" data-page="about" style="padding:13px 11px;font:500 11px/1 'Noto Sans JP',sans-serif;letter-spacing:.2em;color:#cdc2b0;border-bottom:1px solid transparent;text-decoration:none" style-hover="color:#f4ecdd;border-bottom-color:rgba(196,70,42,.7)">ABOUT</a>
-      <a href="menu.html" data-page="menu" style="padding:13px 11px;font:500 11px/1 'Noto Sans JP',sans-serif;letter-spacing:.2em;color:#cdc2b0;color:#f0c79b;border-bottom:1px solid #c4462a;text-decoration:none" style-hover="color:#f4ecdd;border-bottom-color:rgba(196,70,42,.7)">MENU</a>
+      <a href="menu.html" data-page="menu" style="color:#f0c79b;padding:13px 11px;font:500 11px/1 'Noto Sans JP',sans-serif;letter-spacing:.2em;color:#cdc2b0;border-bottom:1px solid #c4462a;text-decoration:none" style-hover="color:#f4ecdd;border-bottom-color:rgba(196,70,42,.7)">MENU</a>
       <a href="space.html" data-page="space" style="padding:13px 11px;font:500 11px/1 'Noto Sans JP',sans-serif;letter-spacing:.2em;color:#cdc2b0;border-bottom:1px solid transparent;text-decoration:none" style-hover="color:#f4ecdd;border-bottom-color:rgba(196,70,42,.7)">SPACE</a>
       <a href="news.html" data-page="news" style="padding:13px 11px;font:500 11px/1 'Noto Sans JP',sans-serif;letter-spacing:.2em;color:#cdc2b0;border-bottom:1px solid transparent;text-decoration:none" style-hover="color:#f4ecdd;border-bottom-color:rgba(196,70,42,.7)">NEWS</a>
       <a href="access.html" data-page="access" style="padding:13px 11px;font:500 11px/1 'Noto Sans JP',sans-serif;letter-spacing:.2em;color:#cdc2b0;border-bottom:1px solid transparent;text-decoration:none" style-hover="color:#f4ecdd;border-bottom-color:rgba(196,70,42,.7)">ACCESS</a>
     </nav>
-    <a href="index.html#instagram" style="display:inline-flex;align-items:center;gap:9px;padding:12px 2px 12px 14px;font:500 11px/1 'Noto Sans JP',sans-serif;letter-spacing:.24em;color:#f0d9bd;border-left:1px solid rgba(239,230,214,.18);text-decoration:none" style-hover="color:#e8935a;letter-spacing:.3em">INSTAGRAM<span style="font-size:13px">→</span></a>
-    </div>
+    <a data-nav="ig-desktop" href="index.html#instagram" style="display:inline-flex;align-items:center;gap:9px;padding:12px 2px 12px 14px;font:500 11px/1 'Noto Sans JP',sans-serif;letter-spacing:.24em;color:#f0d9bd;border-left:1px solid rgba(239,230,214,.18);text-decoration:none" style-hover="color:#e8935a;letter-spacing:.3em">INSTAGRAM<span style="font-size:13px">→</span></a>
+    <button data-nav="burger" type="button" aria-label="メニューを開く" id="nav-toggle-btn" aria-expanded="false" style="display:none;align-items:center;gap:10px;width:auto;min-height:44px;padding:10px 2px 10px 12px;background:transparent;border:0;cursor:pointer;-webkit-tap-highlight-color:transparent">
+      <span style="font:500 9.5px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.28em;color:#a08f77">MENU</span>
+      <span aria-hidden="true" style="display:flex;flex-direction:column;justify-content:center;gap:5px;width:26px;height:26px">
+        <span style="display:block;height:1.5px;background:#f0d9bd;transition:transform .3s ease,opacity .25s ease;transform:none"></span>
+        <span style="display:block;height:1.5px;background:#f0d9bd;transition:opacity .25s ease;opacity:1"></span>
+        <span style="display:block;height:1.5px;background:#f0d9bd;transition:transform .3s ease,opacity .25s ease;transform:none"></span>
+      </span>
+    </button>
+  </div>
+
+  <div data-nav="drawer" id="site-nav-drawer" aria-hidden="true" style="display:block;overflow:hidden;max-height:0px;opacity:0;transition:max-height .42s cubic-bezier(.22,.61,.36,1),opacity .3s ease;border-top:1px solid rgba(239,230,214,.1);background:rgba(9,8,7,.96)">
+    <nav aria-label="サイト内メニュー（モバイル）" style="display:flex;flex-direction:column;padding:6px clamp(14px,4vw,24px) 18px">
+      <a href="index.html" data-page="top" style="display:flex;align-items:baseline;gap:12px;min-height:52px;padding:15px 2px;border-bottom:1px solid rgba(239,230,214,.1);text-decoration:none">
+        <span style="flex:0 0 68px;font:500 10px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.24em;color:#a08f77">TOP</span>
+        <span style="font-family:'Shippori Mincho B1',serif;font-size:15px;letter-spacing:.1em;color:#e3d8c5">松島の夜</span>
+      </a>
+      <a href="about.html" data-page="about" style="display:flex;align-items:baseline;gap:12px;min-height:52px;padding:15px 2px;border-bottom:1px solid rgba(239,230,214,.1);text-decoration:none">
+        <span style="flex:0 0 68px;font:500 10px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.24em;color:#a08f77">ABOUT</span>
+        <span style="font-family:'Shippori Mincho B1',serif;font-size:15px;letter-spacing:.1em;color:#e3d8c5">店について</span>
+      </a>
+      <a href="menu.html" data-page="menu" style="color:#f0c79b;display:flex;align-items:baseline;gap:12px;min-height:52px;padding:15px 2px;border-bottom:1px solid #c4462a;text-decoration:none">
+        <span style="flex:0 0 68px;font:500 10px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.24em;color:#a08f77">MENU</span>
+        <span style="font-family:'Shippori Mincho B1',serif;font-size:15px;letter-spacing:.1em;color:#e3d8c5">お品書き</span>
+      </a>
+      <a href="space.html" data-page="space" style="display:flex;align-items:baseline;gap:12px;min-height:52px;padding:15px 2px;border-bottom:1px solid rgba(239,230,214,.1);text-decoration:none">
+        <span style="flex:0 0 68px;font:500 10px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.24em;color:#a08f77">SPACE</span>
+        <span style="font-family:'Shippori Mincho B1',serif;font-size:15px;letter-spacing:.1em;color:#e3d8c5">店内</span>
+      </a>
+      <a href="news.html" data-page="news" style="display:flex;align-items:baseline;gap:12px;min-height:52px;padding:15px 2px;border-bottom:1px solid rgba(239,230,214,.1);text-decoration:none">
+        <span style="flex:0 0 68px;font:500 10px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.24em;color:#a08f77">NEWS</span>
+        <span style="font-family:'Shippori Mincho B1',serif;font-size:15px;letter-spacing:.1em;color:#e3d8c5">旬の便り</span>
+      </a>
+      <a href="access.html" data-page="access" style="display:flex;align-items:baseline;gap:12px;min-height:52px;padding:15px 2px;border-bottom:1px solid rgba(239,230,214,.1);text-decoration:none">
+        <span style="flex:0 0 68px;font:500 10px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.24em;color:#a08f77">ACCESS</span>
+        <span style="font-family:'Shippori Mincho B1',serif;font-size:15px;letter-spacing:.1em;color:#e3d8c5">場所</span>
+      </a>
+      <a href="index.html#instagram" style="display:inline-flex;align-items:center;gap:10px;align-self:flex-start;min-height:48px;margin-top:16px;padding:14px 2px;font:500 11.5px/1 'Noto Sans JP',sans-serif;letter-spacing:.26em;color:#f4ecdd;border-bottom:2px solid #c4462a;text-decoration:none">INSTAGRAM を見る<span style="font-size:13px">→</span></a>
+    </nav>
   </div>
 </header>
 
