@@ -20,6 +20,20 @@
   @keyframes nagi-sway{0%,100%{transform:skewX(0deg) translateY(0)}50%{transform:skewX(1.1deg) translateY(2px)}}
   @keyframes nagi-ember{0%,100%{opacity:.62}50%{opacity:1}}
   @media (prefers-reduced-motion: reduce){*{animation:none !important}}
+  .nav-toggle{display:none;flex-direction:column;justify-content:center;align-items:center;gap:5px;width:34px;height:34px;padding:0;margin-left:auto;background:transparent;border:0;cursor:pointer}
+  .nav-toggle-bar{display:block;width:22px;height:2px;background:#efe6d6;transition:transform .25s ease,opacity .25s ease}
+  .nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(1){transform:translateY(7px) rotate(45deg)}
+  .nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(2){opacity:0}
+  .nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+  .site-nav{display:contents}
+  @media (max-width:680px){
+    .nav-toggle{display:flex}
+    .site-nav{display:none;flex-basis:100%;order:3;flex-direction:column;align-items:stretch;gap:0;border-top:1px solid rgba(239,230,214,.12);margin-top:6px;padding-top:2px}
+    .site-nav.is-open{display:flex}
+    .site-nav nav{flex-direction:column;align-items:stretch;gap:0;width:100%}
+    .site-nav nav a{width:100%;padding:14px 4px}
+    .site-nav > a{border-left:0 !important;padding:14px 4px !important}
+  }
 </style>
 <script src="reveal.js"></script>
 </head>
@@ -31,6 +45,10 @@
       <span style="font:400 9px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.36em;color:#a08f77">NAGIBI</span>
       <span style="font-size:9.5px;letter-spacing:.2em;color:#7e7263;white-space:nowrap">松島・海鮮居酒屋</span>
     </a>
+    <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="メニューを開く">
+      <span class="nav-toggle-bar"></span><span class="nav-toggle-bar"></span><span class="nav-toggle-bar"></span>
+    </button>
+    <div id="site-nav" class="site-nav">
     <nav aria-label="サイト内メニュー" style="display:flex;flex-wrap:wrap;align-items:center;gap:0 2px">
       <a href="index.html" data-page="top" style="padding:13px 11px;font:500 11px/1 'Noto Sans JP',sans-serif;letter-spacing:.2em;color:#cdc2b0;border-bottom:1px solid transparent;text-decoration:none" style-hover="color:#f4ecdd;border-bottom-color:rgba(196,70,42,.7)">TOP</a>
       <a href="about.html" data-page="about" style="padding:13px 11px;font:500 11px/1 'Noto Sans JP',sans-serif;letter-spacing:.2em;color:#cdc2b0;border-bottom:1px solid transparent;text-decoration:none" style-hover="color:#f4ecdd;border-bottom-color:rgba(196,70,42,.7)">ABOUT</a>
@@ -40,6 +58,7 @@
       <a href="access.html" data-page="access" style="padding:13px 11px;font:500 11px/1 'Noto Sans JP',sans-serif;letter-spacing:.2em;color:#cdc2b0;color:#f0c79b;border-bottom:1px solid #c4462a;text-decoration:none" style-hover="color:#f4ecdd;border-bottom-color:rgba(196,70,42,.7)">ACCESS</a>
     </nav>
     <a href="index.html#instagram" style="display:inline-flex;align-items:center;gap:9px;padding:12px 2px 12px 14px;font:500 11px/1 'Noto Sans JP',sans-serif;letter-spacing:.24em;color:#f0d9bd;border-left:1px solid rgba(239,230,214,.18);text-decoration:none" style-hover="color:#e8935a;letter-spacing:.3em">INSTAGRAM<span style="font-size:13px">→</span></a>
+    </div>
   </div>
 </header>
 

@@ -83,3 +83,39 @@
     start();
   }
 })();
+
+/* ハンバーガーメニュー（スマホ幅） */
+(function () {
+  function init() {
+    var btn = document.querySelector('.nav-toggle');
+    var panel = document.getElementById('site-nav');
+    if (!btn || !panel) return;
+
+    function close() {
+      btn.setAttribute('aria-expanded', 'false');
+      panel.classList.remove('is-open');
+    }
+    function toggle() {
+      var open = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!open));
+      panel.classList.toggle('is-open', !open);
+    }
+
+    btn.addEventListener('click', toggle);
+    panel.addEventListener('click', function (e) {
+      if (e.target && e.target.closest && e.target.closest('a')) close();
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') close();
+    });
+    window.addEventListener('resize', function () {
+      if (window.innerWidth > 680) close();
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
